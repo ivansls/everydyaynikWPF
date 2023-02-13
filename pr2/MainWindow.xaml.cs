@@ -20,11 +20,13 @@ namespace pr2
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        //logica l = new logica();
         public MainWindow()
         {
             InitializeComponent();
-            string[] items = new string[] { "1", "2", "3" };
-            list.ItemsSource = items;
+            /*Date.Text = now.ToString();
+            Date.Text = now.AddDays(1).ToString();*/
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -44,7 +46,7 @@ namespace pr2
 
         private void Dellete_Buttom_Click(object sender, RoutedEventArgs e)
         {
-
+            //l.log(Date, list);
         }
 
         private void Add_Buttom_Click(object sender, RoutedEventArgs e)
@@ -54,7 +56,12 @@ namespace pr2
 
         private void Edit_Buttom_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
 
+        private void DatePicker_SelectedDateChsnged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }
