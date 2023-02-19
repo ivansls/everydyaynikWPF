@@ -12,28 +12,145 @@ namespace pr2
 {
     internal class logica
     {
-        //DateTime now = DateTime.Now;
         string f;
-        public void log(DatePicker Date, ListBox list)
-
+        public static List<string> op = new List<string>();
+        public static string ti = "";
+        public static List<my_type> type = desir.MyDesirialize<List<my_type>>();
+        public static my_type my;
+        public static void log(DatePicker Date, ListBox list)
         {
-            Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("14.02.2023 0:00:00", "lalala");
-            /*DateTime dt = Date.DisplayDate;
+            list.ItemsSource = "";
 
-            string f = Date.SelectedDate.ToString();*/
-            MessageBox.Show(f);
-            /*foreach (string s in dic.Keys)
+            foreach (my_type i in type)
             {
-                if (f == s)
+                if (i.Time.ToString() == Date.Text.ToString())
                 {
-                    list.ItemsSource = dic[f];
+                    list.ItemsSource = i.Name;
+                    op = i.Opis;
                 }
-            }*/
+                
+
+            }
             
-            /*Date.Text = now.ToString();
-            Date.Text = now.AddDays(1).ToString();*/
+
         }
+
+        public static void del(DatePicker Date, ListBox list)
+        {
+            try
+            {
+                foreach (my_type k in type)
+                {
+                    string item = list.Items[list.SelectedIndex].ToString();
+                    try
+                    {
+
+                        foreach (string v in k.Name)
+                        {
+                            if (v == item && Date.Text == k.Time)
+                            {
+                                int i = k.Name.IndexOf(v);
+                                k.Name.RemoveAt(i);
+                                k.Opis.RemoveAt(i);
+
+                                if (k.Name.Count == 0)
+                                {
+                                    int c = type.IndexOf(k);
+                                    type.RemoveAt(c);
+                                }
+                                desir.MySerialeze(type);
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        type = desir.MyDesirialize<List<my_type>>();
+                        log(Date, list);
+                    }
+
+                }
+            }
+            catch(Exception ex)
+            {
+                type = desir.MyDesirialize<List<my_type>>();
+                log(Date, list);
+            }
+
+
+        }
+
+        public static void add(DatePicker Date, ListBox list, TextBox textbox_name, TextBox textbox_name_opis)
+        {
+            if (list.ItemsSource == "")
+            {
+                my_type add_type = new my_type();
+                add_type.Time = Date.Text;
+                add_type.Name.Add(textbox_name.Text);
+                add_type.Opis.Add(textbox_name_opis.Text);
+
+                type.Add(add_type);
+                desir.MySerialeze(type);
+                type = desir.MyDesirialize<List<my_type>>();
+                log(Date, list);
+            }
+            else
+            {
+                foreach(my_type t in type)
+                {
+                    //string item = list.Items[list.SelectedIndex].ToString();
+                    if (t.Time.ToString() == Date.Text.ToString())
+                    {
+                        t.Name.Add(textbox_name.Text);
+                        t.Opis.Add(textbox_name_opis.Text);
+                        desir.MySerialeze(type);
+                    }
+                }
+                type = desir.MyDesirialize<List<my_type>>();
+                log(Date, list);
+            }
+        }
+
+        public static void edit(DatePicker Date, ListBox list, TextBox textbox_name, TextBox textbox_name_opis)
+        {
+            foreach (my_type k in type)
+            {
+                try
+                {
+                    string item = list.Items[list.SelectedIndex].ToString();
+                    try
+                    {
+                        foreach (string v in k.Name)
+                        {
+                            if (v == item && Date.Text == k.Time)
+                            {
+                                int i = k.Name.IndexOf(v);
+                                k.Name.RemoveAt(i);
+                                k.Opis.RemoveAt(i);
+                                k.Name.Add(textbox_name.Text);
+                                k.Opis.Add(textbox_name_opis.Text);
+                                desir.MySerialeze(type);
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        type = desir.MyDesirialize<List<my_type>>();
+                        log(Date, list);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    continue;
+                }
+
+            }
+        }
+        
+        
+
+
 
     }
 }

@@ -20,7 +20,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DatePicker Name="Date" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Margin="0,6,0,22" Grid.RowSpan="2"/>
+        <DatePicker Name="Date" VerticalContentAlignment="Center" Margin="0,0,1,1" Grid.ColumnSpan="3" CalendarClosed="Date_CalendarClosed"/>
         <ListBox Name="list" Grid.Row="1" Grid.RowSpan="4"  SelectionChanged="ListBox_SelectionChanged"/>
         <TextBlock Name ="textblock_name" Text="Название заметки" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Name ="textblock_name_opis" Text="Описание заметки" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>

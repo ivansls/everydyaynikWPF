@@ -15,14 +15,14 @@ namespace pr2
             string desktop = Environment.GetFolderPath((Environment.SpecialFolder.Desktop));
 
             string json = JsonConvert.SerializeObject(pers);
-            File.WriteAllText(desktop + "/PEOPLE_PASSWORD.json", json);
+            File.WriteAllText("\\\\Mac\\Home\\Desktop\\123.json", json);
         }
 
         public static T MyDesirialize<T>()
         {
             string desktop = Environment.GetFolderPath((Environment.SpecialFolder.Desktop));
 
-            string json = File.ReadAllText(desktop + "/PEOPLE_PASSWORD.json");
+            string json = File.ReadAllText("\\\\Mac\\Home\\Desktop\\123.json");
             T type = JsonConvert.DeserializeObject<T>(json);
             return type;
         }
